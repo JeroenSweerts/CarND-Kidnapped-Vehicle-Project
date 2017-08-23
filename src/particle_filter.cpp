@@ -20,10 +20,46 @@
 using namespace std;
 
 void ParticleFilter::init(double x, double y, double theta, double std[]) {
+    default_random_engine gen;
+    double std_x, std_y, std_psi;
+    std_x = std[0];
+    std_y = std[1];
+    std_psi = std[2];
+    is_initialized = false;
+    num_particles = 10000;
+    //set the size of the vector
+    particles.reserve(num_particles); 
+    weights.reserve(num_particles);
+    
+    normal_distribution<double> dist_x(x,std_x);
+    normal_distribution<double> dist_y(y,std_y);
+    normal_distribution<double> dist_psi(theta,std_psi);
+    
+    for (int i = 0; i < num_particles; ++i) {
+     double sample_x, sample_y, sample_psi;
+     
+     sample_x = dist_x(gen);
+     sample_y = dist_y(gen);
+     sample_psi = dist_psi(gen);     
+     
+     particles[i].id = i;
+     particles[i].x = sample_x;
+     particles[i].y = sample_y;
+     particles[i].theta = sample_psi;
+     particles[i].weight = 1;
+     weights[i] = 1;
+   }
+    
+    
+    
 	// TODO: Set the number of particles. Initialize all particles to first position (based on estimates of 
 	//   x, y, theta and their uncertainties from GPS) and all weights to 1. 
 	// Add random Gaussian noise to each particle.
 	// NOTE: Consult particle_filter.h for more information about this method (and others in this file).
+    
+    //See 3-5.
+    
+    is_initialized = true;
 
 }
 
@@ -32,6 +68,8 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
 	// NOTE: When adding noise you may find std::normal_distribution and std::default_random_engine useful.
 	//  http://en.cppreference.com/w/cpp/numeric/random/normal_distribution
 	//  http://www.cplusplus.com/reference/random/default_random_engine/
+    
+    //See 6-8
 
 }
 
@@ -40,6 +78,8 @@ void ParticleFilter::dataAssociation(std::vector<LandmarkObs> predicted, std::ve
 	//   observed measurement to this particular landmark.
 	// NOTE: this method will NOT be called by the grading code. But you will probably find it useful to 
 	//   implement this method and use it as a helper during the updateWeights phase.
+    
+    //See 9-10
 
 }
 
@@ -55,12 +95,16 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 	//   and the following is a good resource for the actual equation to implement (look at equation 
 	//   3.33
 	//   http://planning.cs.uiuc.edu/node99.html
+    
+    //See 11
 }
 
 void ParticleFilter::resample() {
 	// TODO: Resample particles with replacement with probability proportional to their weight. 
 	// NOTE: You may find std::discrete_distribution helpful here.
 	//   http://en.cppreference.com/w/cpp/numeric/random/discrete_distribution
+    
+    //See Lesson 13
 
 }
 

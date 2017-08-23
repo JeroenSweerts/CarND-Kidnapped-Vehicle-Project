@@ -1,0 +1,35 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x00)
+
+[CMake]
+Build Directory Count=1
+Current Build Directory Index=0
+
+[CMake][CMake Build Directory 0]
+Build Directory Path=/home/jeroensweerts/Udacity/Self_Driving_CarND/term2/CarND-Kidnapped-Vehicle-Project/build
+Build Type=Debug
+CMake Binary=/usr/bin/cmake
+Environment Profile=
+Extra Arguments=
+Install Directory=
+
+[Launch]
+Launch Configurations=Launch Configuration 0
+
+[Launch][Launch Configuration 0]
+Configured Launch Modes=execute
+Configured Launchers=nativeAppLauncher
+Name=New Compiled Binary Launcher
+Type=Native Application
+
+[Launch][Launch Configuration 0][Data]
+Arguments=
+Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x00)
+Dependency Action=Build
+EnvironmentGroup=
+Executable=file:///home/jeroensweerts/Udacity/Self_Driving_CarND/term2/CarND-Kidnapped-Vehicle-Project/build/particle_filter
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+Project Target=CarND-Kidnapped-Vehicle-Project,particle_filter
+Use External Terminal=false
+Working Directory=
+isExecutable=false

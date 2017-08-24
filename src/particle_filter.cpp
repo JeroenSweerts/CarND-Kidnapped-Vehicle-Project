@@ -70,6 +70,37 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
 	//  http://www.cplusplus.com/reference/random/default_random_engine/
     
     //See 6-8
+    default_random_engine gen;
+    double std_x, std_y, std_psi;
+    std_x = std_pos[0];
+    std_y = std_pos[1];
+    std_psi = std_pos[2];
+    
+
+
+    for (int i = 0; i < particles.size(); ++i) {
+        double sample_x, sample_y, sample_psi; 
+        
+        particles[i].x = particles[i].x + ((velocity/yaw_rate)*(sin(particles[i].theta+(yaw_rate*delta_t))-sin(particles[i].theta)));
+        
+        particles[i].y = particles[i].y + ((velocity/yaw_rate)*(cos(particles[i].theta) - cos(particles[i].theta+(yaw_rate*delta_t))));
+        
+        particles[i].theta = particles[i].theta + yaw_rate*delta_t;
+
+     
+        normal_distribution<double> dist_x(particles[i].x,std_x);
+        normal_distribution<double> dist_y(particles[i].y,std_y);
+        normal_distribution<double> dist_psi(particles[i].theta,std_psi);
+        
+        sample_x = dist_x(gen);
+        sample_y = dist_y(gen);
+        sample_psi = dist_psi(gen);
+     
+        particles[i].x = sample_x;
+        particles[i].y = sample_y;
+        particles[i].theta = sample_psi;
+
+   }    
 
 }
 

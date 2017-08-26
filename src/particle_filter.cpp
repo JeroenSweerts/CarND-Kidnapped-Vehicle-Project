@@ -127,7 +127,8 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 	//   3.33
 	//   http://planning.cs.uiuc.edu/node99.html
     
-    //See 11
+    //See 11,17,18
+    
 }
 
 void ParticleFilter::resample() {
@@ -136,7 +137,17 @@ void ParticleFilter::resample() {
 	//   http://en.cppreference.com/w/cpp/numeric/random/discrete_distribution
     
     //See Lesson 13
-
+    default_random_engine gen;
+    discrete_distribution<int> distribution(weights.begin(), weights.end());
+    
+    vector<Particle> resample_particles;
+    
+    for (int i = 0; i < num_particles;i++)
+    {
+            resample_particles.push_back(particles[distribution(gen)]);
+    }
+    
+    particles = resample_particles;
 }
 
 Particle ParticleFilter::SetAssociations(Particle particle, std::vector<int> associations, std::vector<double> sense_x, std::vector<double> sense_y)
